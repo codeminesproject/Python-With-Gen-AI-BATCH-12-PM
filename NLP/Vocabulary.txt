@@ -1,0 +1,5 @@
+
+nltk -> natural language tool kit
+Paragraph -> Corpus
+Sentences -> Documents 
+piece of words -> tokens
