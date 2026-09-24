@@ -1,0 +1,256 @@
+Word2Vec (Skip-Gram) - Complete Notes
+
+1. What is Skip-Gram?
+
+Skip-Gram is one of the two Word2Vec architectures.
+
+Its objective is:
+
+Predict the surrounding (context) words using the center (target) word.
+
+Unlike CBOW, where context words predict the target word, Skip-Gram does
+the opposite.
+
+------------------------------------------------------------------------
+
+2. Example Sentence
+
+“The king is a strong man.”
+
+Vocabulary
+
+    Index Word
+  ------- --------
+        1 the
+        2 king
+        3 is
+        4 a
+        5 strong
+        6 man
+
+Vocabulary Size = 6
+
+------------------------------------------------------------------------
+
+3. One-Hot Encoding
+
+  Word     One-Hot Vector
+  -------- ----------------
+  the      [1,0,0,0,0,0]
+  king     [0,1,0,0,0,0]
+  is       [0,0,1,0,0,0]
+  a        [0,0,0,1,0,0]
+  strong   [0,0,0,0,1,0]
+  man      [0,0,0,0,0,1]
+
+------------------------------------------------------------------------
+
+4. Skip-Gram Training
+
+Sentence:
+
+The king is a strong man
+
+Assume Window Size = 5 (2 words before and 2 words after)
+
+Center Word (Input)
+
+is
+
+Context Words (Output)
+
+the king a strong
+
+Training Pairs
+
+  Input (Center Word)   Output (Context Word)
+  --------------------- -----------------------
+  is                    the
+  is                    king
+  is                    a
+  is                    strong
+
+Instead of one training example, Skip-Gram creates multiple training
+pairs.
+
+------------------------------------------------------------------------
+
+5. Input Layer
+
+Input Word
+
+is
+
+One-Hot Vector
+
+[0,0,1,0,0,0]
+
+------------------------------------------------------------------------
+
+6. Hidden Layer (Embedding Layer)
+
+Assume
+
+Vocabulary Size = 6
+
+Embedding Size = 4
+
+Hidden Layer (Embedding Matrix)
+
+  Word         D1      D2     D3     D4
+  -------- ------ ------- ------ ------
+  the        0.15   -0.22   0.61   0.40
+  king       0.92    0.81   0.74   0.66
+  is         0.10    0.05   0.18   0.12
+  a          0.12    0.14   0.09   0.03
+  strong     0.75    0.88   0.60   0.52
+  man        0.90    0.79   0.71   0.64
+
+When the input word is “is”, the hidden layer selects the row
+corresponding to “is”.
+
+Embedding of “is”
+
+[0.10, 0.05, 0.18, 0.12]
+
+------------------------------------------------------------------------
+
+7. Output Layer
+
+Using the embedding of “is”, the network predicts every surrounding
+word.
+
+Example probabilities
+
+  Word       Probability
+  -------- -------------
+  the               0.85
+  king              0.91
+  is                0.02
+  a                 0.88
+  strong            0.82
+  man               0.05
+
+The model learns that “the”, “king”, “a”, and “strong” are likely
+context words for the center word “is”.
+
+------------------------------------------------------------------------
+
+8. Training Process
+
+Initially, the embedding matrix contains random values.
+
+Example
+
+  Word       D1      D2     D3     D4
+  ------ ------ ------- ------ ------
+  is       0.21   -0.15   0.32   0.18
+
+After training on millions of sentences
+
+  Word       D1     D2     D3     D4
+  ------ ------ ------ ------ ------
+  is       0.10   0.05   0.18   0.12
+
+These values are learned using backpropagation.
+
+------------------------------------------------------------------------
+
+9. Skip-Gram Architecture
+
+Sentence
+
+“The king is a strong man”
+
+             |
+             V
+
+Center Word
+
+is
+
+             |
+             V
+
+Input Layer
+
+One-Hot Vector
+
+[0,0,1,0,0,0]
+
+             |
+             V
+
+Hidden Layer
+
+Embedding Matrix
+
+             |
+             V
+
+Embedding of “is”
+
+[0.10,0.05,0.18,0.12]
+
+             |
+             V
+
+Output Layer
+
+Predicts
+
+the king a strong
+
+------------------------------------------------------------------------
+
+10. Advantages
+
+-   Learns high-quality word embeddings.
+-   Performs well for rare words.
+-   Works well on small datasets.
+-   Captures semantic relationships effectively.
+
+------------------------------------------------------------------------
+
+11. Disadvantages
+
+-   Slower than CBOW.
+-   Creates many training pairs.
+-   Requires more computation.
+
+------------------------------------------------------------------------
+
+12. CBOW vs Skip-Gram
+
+  Feature         CBOW            Skip-Gram
+  --------------- --------------- ---------------
+  Input           Context Words   Center Word
+  Output          Center Word     Context Words
+  Speed           Faster          Slower
+  Rare Words      Moderate        Better
+  Small Dataset   Good            Excellent
+  Large Dataset   Excellent       Good
+
+------------------------------------------------------------------------
+
+13. Interview Questions
+
+1.  What is Skip-Gram?
+2.  How is Skip-Gram different from CBOW?
+3.  Why is Skip-Gram slower than CBOW?
+4.  Why is Skip-Gram good for rare words?
+5.  What is the role of the hidden layer?
+6.  What is the embedding matrix?
+7.  What is the input and output in Skip-Gram?
+
+------------------------------------------------------------------------
+
+14. Summary
+
+-   Skip-Gram predicts surrounding words from a center word.
+-   It uses one-hot encoding as input.
+-   The hidden layer stores the embedding matrix.
+-   Each word is represented by a dense embedding vector.
+-   The embeddings are learned through backpropagation.
+-   Skip-Gram is slower than CBOW but generally learns better
+    representations for infrequent words.

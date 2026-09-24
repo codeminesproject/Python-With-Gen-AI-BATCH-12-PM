@@ -1,0 +1,149 @@
+TF-IDF (Term Frequency – Inverse Document Frequency)
+
+Definition
+
+TF-IDF (Term Frequency – Inverse Document Frequency) is a numerical
+technique used in Natural Language Processing (NLP) to measure how
+important a word is in a document relative to a collection of documents
+(corpus).
+
+It combines two measures:
+
+1. Term Frequency (TF)
+
+Formula:
+
+TF = (Number of repetitions of the word in the sentence) / (Total number of words in the sentence)
+
+TF measures how frequently a word appears in a document.
+
+2. Inverse Document Frequency (IDF)
+
+Formula:
+
+IDF = log e( Number of Sentences / Number of Sentences containing the word
+)
+
+IDF reduces the importance of words that appear in many documents and
+increases the importance of words that appear in fewer documents.
+
+  ---------
+  Example
+  ---------
+
+Documents
+
+S1 = “good boy” 
+S2 = “good girl” 
+S3 = “boy girl good”
+
+Vocabulary: good, boy, girl
+
+  -----------------------------
+  Step 1: Term Frequency (TF)
+  -----------------------------
+
+  Word   S1    S2    S3
+  ------ ----- ----- -----
+  good   1/2   1/2   1/3
+  boy    1/2   0     1/3
+  girl   0     1/2   1/3
+
+Explanation: - 
+In S1, the word “good” appears once and there are 2 words. TF(good, S1) = 1/2
+
+In S2, the word “girl” appears once and there are 2 words. TF(girl,S2) = 1/2
+
+In S3, each word appears once and there are 3 words. TF = 1/3
+
+  ------------------------------------------
+  Step 2: Inverse Document Frequency (IDF)
+  ------------------------------------------
+
+Total number of documents = 3
+
+Document Frequency (DF)
+
+good -> appears in S1, S2, S3 = 3 
+boy -> appears in S1, S3 = 2 
+girl -> appears in S2, S3 = 2
+
+IDF(good) = log(3/3) = 0
+
+IDF(boy) = log(3/2) = 0.1761
+
+IDF(girl) = log(3/2) = 0.1761
+
+  ----------------
+  Step 3: TF-IDF
+  ----------------
+
+TF-IDF = TF × IDF
+
+  Word   S1      S2      S3
+  ------ ------- ------- --------
+  good   0       0       0
+  boy    0.088   0       0.0587
+  girl   0       0.088   0.0587
+
+  ------------
+  Conclusion
+  ------------
+
+-   TF measures the frequency of a word within a document.
+-   IDF measures how unique a word is across all documents.
+-   TF-IDF gives higher scores to important words that occur frequently
+    in one document but not in all documents.
+-   Since “good” appears in every document, its IDF becomes 0, making
+    its TF-IDF score 0.
+-   The words “boy” and “girl” are more informative because they appear
+    in fewer documents, so they receive higher TF-IDF scores.
+
+Advantages and Disadvantages of TF-IDF
+
+Advantages
+
+1.  Intuitive
+
+-   TF-IDF is easy to understand and implement.
+-   It calculates the importance of a word using simple mathematical
+    formulas.
+
+2.  Fixed Size Representation
+
+-   The feature vector has a fixed size equal to the vocabulary size.
+-   Every document is represented using the same number of features.
+
+3.  Captures Word Importance
+
+-   TF-IDF assigns higher weights to important words.
+-   Common words that appear in almost every document receive lower
+    weights.
+-   This helps distinguish one document from another.
+
+------------------------------------------------------------------------
+
+Disadvantages
+
+1.  Sparsity Still Exists
+
+-   Most values in the TF-IDF matrix are zero because every document
+    contains only a few words from the complete vocabulary.
+-   This results in a sparse matrix, increasing memory usage for large
+    datasets.
+
+2.  OOV (Out of Vocabulary)
+
+-   TF-IDF cannot handle words that were not present in the training
+    vocabulary.
+-   Any new or unseen word is ignored during transformation.
+
+------------------------------------------------------------------------
+
+Summary
+
+Advantages - Easy to understand and implement. - Fixed-size feature
+vector. - Captures the importance of words effectively.
+
+Disadvantages - Produces sparse matrices. - Cannot handle
+Out-of-Vocabulary (OOV) words.

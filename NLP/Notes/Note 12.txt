@@ -1,0 +1,170 @@
+
+==============================================================
+           WORD2VEC TRAINING PROCESS (EPOCHS)
+==============================================================
+
+1. EXAMPLE DATASET
+--------------------------------------------------------------
+
+Suppose the training dataset contains only 5 sentences.
+
++----+-----------------------------------------+
+| No | Sentence                                |
++----+-----------------------------------------+
+| 1  | The king is a strong man.               |
+| 2  | The queen is a wise woman.              |
+| 3  | The prince is young.                    |
+| 4  | The princess is beautiful.              |
+| 5  | The king ruled the kingdom.             |
++----+-----------------------------------------+
+
+Initial embedding of the word "king"
+
++------+-------+-------+-------+-------+
+| Word |  D1   |  D2   |  D3   |  D4   |
++------+-------+-------+-------+-------+
+| king | 0.20  | 0.50  | -0.10 | 0.80  |
++------+-------+-------+-------+-------+
+
+==============================================================
+2. EPOCH 1 (FIRST PASS)
+==============================================================
+
+The model reads all 5 sentences once.
+
+Sentence 1 --> Update Embedding
+Sentence 2 --> Update Embedding
+Sentence 3 --> Update Embedding
+Sentence 4 --> Update Embedding
+Sentence 5 --> Update Embedding
+
+Embedding after Epoch 1
+
++------+-------+-------+------+------+
+| Word |  D1   |  D2   | D3   | D4   |
++------+-------+-------+------+------+
+| king | 0.32  | 0.48  | 0.05 | 0.82 |
++------+-------+-------+------+------+
+
+==============================================================
+3. EPOCH 2 (SECOND PASS)
+==============================================================
+
+The model again starts from Sentence 1.
+
+Sentence 1 --> Update Embedding
+Sentence 2 --> Update Embedding
+Sentence 3 --> Update Embedding
+Sentence 4 --> Update Embedding
+Sentence 5 --> Update Embedding
+
+Embedding after Epoch 2
+
++------+-------+-------+------+------+
+| Word |  D1   |  D2   | D3   | D4   |
++------+-------+-------+------+------+
+| king | 0.51  | 0.62  | 0.38 | 0.74 |
++------+-------+-------+------+------+
+
+==============================================================
+4. EPOCH 3 (THIRD PASS)
+==============================================================
+
+The model again processes all 5 sentences.
+
+Sentence 1 --> Update Embedding
+Sentence 2 --> Update Embedding
+Sentence 3 --> Update Embedding
+Sentence 4 --> Update Embedding
+Sentence 5 --> Update Embedding
+
+Embedding after Epoch 3
+
++------+-------+-------+------+------+
+| Word |  D1   |  D2   | D3   | D4   |
++------+-------+-------+------+------+
+| king | 0.72  | 0.75  | 0.59 | 0.71 |
++------+-------+-------+------+------+
+
+==============================================================
+5. AFTER MANY EPOCHS
+==============================================================
+
+The embedding gradually stabilizes.
+
++------+-------+-------+------+------+
+| Word |  D1   |  D2   | D3   | D4   |
++------+-------+-------+------+------+
+| king | 0.92  | 0.81  | 0.74 | 0.66 |
++------+-------+-------+------+------+
+
+==============================================================
+6. WHAT IS AN EPOCH?
+==============================================================
+
+An Epoch = One complete pass through the entire training dataset.
+
+Example:
+
+Dataset = 1000 sentences
+
+Epoch 1
+--------
+Sentence 1
+Sentence 2
+...
+Sentence 1000
+
+Epoch 2
+--------
+Again starts from Sentence 1 and processes all 1000 sentences.
+
+==============================================================
+7. TYPICAL NUMBER OF EPOCHS
+==============================================================
+
++----------------------+--------------+
+| Dataset Size         | Epochs       |
++----------------------+--------------+
+| Small Dataset        | 20 - 100     |
+| Medium Dataset       | 10 - 30      |
+| Large Dataset        | 5 - 10       |
++----------------------+--------------+
+
+==============================================================
+8. GOOGLE'S ORIGINAL WORD2VEC
+==============================================================
+
+Training Corpus : 100+ Billion Words
+Embedding Size  : 300
+Window Size     : 5
+Training Epochs : About 5
+
+==============================================================
+9. HOW MANY UPDATES HAPPEN?
+==============================================================
+
+Example:
+
+1000 Sentences
+× 10 Words per Sentence
+= 10,000 Words
+
+20 Epochs
+
+10,000 × 20 = 200,000 Word Updates
+
+The embedding matrix (hidden layer) is updated after every
+training example.
+
+==============================================================
+10. INTERVIEW ANSWER
+==============================================================
+
+Q. How many times are Word2Vec embeddings updated?
+
+Answer:
+The embeddings are updated after every training example.
+One complete pass through the dataset is called an epoch.
+The model repeats this process for multiple epochs until
+training is complete or the embeddings converge.

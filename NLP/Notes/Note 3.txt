@@ -1,0 +1,75 @@
+
+One-Hot Encoding in Natural Language Processing (NLP)
+
+Definition
+One-Hot Encoding is a technique used in Natural Language Processing (NLP) 
+to convert categorical words into numerical vectors so that machine learning algorithms can process them.
+
+In One-Hot Encoding, each unique word in the vocabulary is represented by a binary vector where:
+- Only one position contains 1 (indicating the presence of the word).
+- All other positions contain 0.
+
+The length of the vector is equal to the total number of unique words in the vocabulary.
+
+Why Do We Need One-Hot Encoding?
+
+Computers cannot understand text directly. Machine learning algorithms work only with numerical data.
+
+For example:
+Cat
+Dog
+Bird
+
+The computer cannot process these words directly, so we convert them into numerical vectors using One-Hot Encoding.
+
+Example
+Step 1: Create Vocabulary
+
+Suppose we have the following sentence:
+
+I love NLP
+
+The unique words (vocabulary) are:
+
+['I', 'love', 'NLP']
+
+Vocabulary Size = 3
+
+Step 2: Assign Position to Each Word
+
+I      -> Position 0
+love   -> Position 1
+NLP    -> Position 2
+
+
+Step 3: Create One-Hot Vectors
+Word : I
+One-Hot Vector : [1, 0, 0]
+
+Word : love
+One-Hot Vector : [0, 1, 0]
+
+Word : NLP
+One-Hot Vector : [0, 0, 1]
+
+Advantages of One-Hot Encoding
+- Simple and easy to understand.
+- Converts categorical text into numerical form.
+- No numerical relationship is assumed between words.
+- Works well for small vocabularies.
+- Commonly used as a basic text representation technique.
+
+Disadvantages of One-Hot Encoding
+1. Creates Sparse Matrices
+    One-Hot Encoding generates many columns, most of which contain 0s.
+    This results in a sparse matrix, which can increase memory usage and may lead to overfitting in some machine learning models.
+2. Increases Input Size
+    If a categorical feature has many unique values, One-Hot Encoding creates one new column for each category.
+    This significantly increases the number of input features (high dimensionality), making training slower and requiring more computational resources.
+3. Does Not Capture Semantic Meaning
+    One-Hot Encoding treats every category as completely independent.
+    It does not represent any relationship or similarity between categories.
+    Example: "Cat" and "Tiger" are encoded as equally different as "Cat" and "Car".
+4. Out-of-Vocabulary (OOV) Problem
+    If a new category appears during testing or prediction that was not present during training, the encoder cannot represent it correctly.
+    This is known as the Out-of-Vocabulary (OOV) problem.

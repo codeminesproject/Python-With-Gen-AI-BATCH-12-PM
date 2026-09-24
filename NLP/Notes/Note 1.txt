@@ -1,0 +1,213 @@
+Natural Language Processing (NLP) is a branch of Artificial Intelligence (AI) that enables 
+computers to understand, interpret, analyze, and generate human language 
+(such as English, Hindi, French, etc.) in a meaningful way.
+
+NLP combines Computer Science, Artificial Intelligence, Machine Learning, and Linguistics to help computers process 
+and understand natural language.
+
+Example
+Input (Human Language): I love learning Natural Language Processing.
+
+NLP Processing
+Step 1: Tokenize the sentence into words.
+Step 2: Remove unnecessary words (stopwords).
+Step 3: Identify the part of speech of each word.
+Step 4: Understand the meaning of the sentence.
+Step 5: Perform sentiment analysis.
+
+Output
+Sentiment: Positive
+
+Applications of NLP
+1. Chatbots (ChatGPT, Gemini)
+2. Machine Translation (Google Translate)
+3. Voice Assistants (Siri, Alexa)
+4. Spam Email Detection
+5. Sentiment Analysis
+6. Text Summarization
+7. Search Engines
+8. Speech Recognition
+9. Question Answering Systems
+10. Text Classification
+
+Steps of Natural Language Processing (NLP)
+
+Raw Text
+    │
+    ▼
+1. Text Preprocessing
+    │
+    ▼
+2. Tokenization
+    │
+    ▼
+3. Stopword Removal
+    │
+    ▼
+4. Stemming / Lemmatization
+    │
+    ▼
+5. Part-of-Speech (POS) Tagging
+    │
+    ▼
+6. Named Entity Recognition (NER)
+    │
+    ▼
+7. Feature Extraction
+    │
+    ▼
+8. Model Training / Prediction
+    │
+    ▼
+Final Output
+
+
+----------------------------------------------------------------------------
+
+Tokenization
+
+It is a process of converting paragraph into words (token)
+
+Step 1: Corpus (Input)
+Step 2: Document (Convert copus (paragraphs) into sentences)
+step 3: words (Convert sentences into words with stopword)
+step 4: token (unique words without stopwords)
+
+------------------------------------------------------------------------
+
+For tokenization we required a python library NLTK - Natural Language Toolkit
+
+Step 1: install nltk package - pip install nltk
+----------------------------------------------------------------------------
+
+Stemming
+Stemming is the process of reducing a word to its word stem that affixes to suffixes and prefixes 
+or to the roots of words known as a lemma. Stemming is important in natural language understanding (NLU) 
+and natural language processing (NLP).
+
+Type of Stemming:
+1. PorterStemmer
+2. RegexpStemmer
+3. SnowballStemmer
+
+---------------------------------------------------------------------------------
+
+Lemmatization
+Lemmatization technique is like stemming. 
+The output we will get after lemmatization is called ‘lemma’, which is a root word rather than root stem, 
+the output of stemming. After lemmatization, we will be getting a valid word that means the same thing.
+NLTK provides WordNetLemmatizer class which is a thin wrapper around the wordnet corpus. 
+This class uses morphy() function to the WordNet CorpusReader class to find a lemma.
+
+usecases:
+Q&A,chatbots,text summarization
+
+---------------------------------------------------------------------------------
+
+Stopwords
+
+Stopwords are commonly used words in a language that usually do not add significant meaning to the text.
+
+Examples:
+is, am, are, the, a, an, of, in, on, for, with, and, to
+
+---------------------------------------------------------------------------------
+
+Part of Speech Tagging
+
+Part-of-Speech (POS) Tagging is the process of identifying and assigning the correct grammatical 
+category (part of speech) to each word in a sentence based on its meaning and context.
+These grammatical categories include noun, pronoun, verb, adjective, adverb, preposition, conjunction, 
+determiner, interjection, and others.
+
+POS Tags in NLP (NLTK)
+
+NN   - Noun
+       Example: book, car
+
+NNS  - Plural Noun
+       Example: books
+
+NNP  - Proper Noun
+       Example: Mumbai, India
+
+VB   - Verb (Base Form)
+       Example: eat
+
+VBD  - Verb (Past Tense)
+       Example: ate
+
+VBG  - Verb (Present Participle / Gerund)
+       Example: eating
+
+VBN  - Verb (Past Participle)
+       Example: eaten
+
+VBP  - Verb (Present Tense)
+       Example: eat
+
+VBZ  - Verb (3rd Person Singular Present)
+       Example: eats
+
+JJ   - Adjective
+       Example: beautiful
+
+JJR  - Comparative Adjective
+       Example: bigger
+
+JJS  - Superlative Adjective
+       Example: biggest
+
+RB   - Adverb
+       Example: quickly
+
+DT   - Determiner
+       Example: the, a, an
+
+PRP  - Personal Pronoun
+       Example: he, she, they
+
+IN   - Preposition
+       Example: in, on, at
+
+CC   - Coordinating Conjunction
+       Example: and, but, or
+
+UH   - Interjection
+       Example: wow!, oh!
+
+
+Why is POS Tagging Important?
+POS tagging helps computers understand the grammatical structure of a sentence. 
+
+It is widely used in:
+Machine Translation
+Text Summarization
+Question Answering Systems
+Chatbots
+Sentiment Analysis
+Named Entity Recognition (NER)
+Information Extraction
+Speech Recognition
+
+Sentence:
+Rahul is playing cricket.
+
+POS Tags:
+
+Word        POS Tag     Meaning
+-----------------------------------------------
+Rahul       NNP         Proper Noun
+is          VBZ         Verb (3rd Person Singular Present)
+playing     VBG         Verb (Present Participle)
+cricket     NN          Noun
+.           .           Punctuation
+
+
+---------------------------------------------------------------------------------
+
+Named Entity Recognition
+
+Named Entity Recognition (NER) is a Natural Language Processing (NLP) technique that identifies 
+and classifies important entities (real-world objects) mentioned in a text into predefined categories 
+such as Person, Organization, Location, Date, Time, Money, Percentage, Email, Product, and more.

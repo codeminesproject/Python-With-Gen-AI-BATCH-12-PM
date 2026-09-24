@@ -1,0 +1,64 @@
+WORD EMBEDDING
+
+Definition
+
+Word Embedding is a technique in Natural Language Processing (NLP) that
+converts words into numerical vectors (decimal numbers) so that a
+computer can understand the meaning and relationship between words.
+
+Unlike Bag of Words (BoW) or TF-IDF, Word Embedding captures the
+semantic meaning of words. Words with similar meanings have similar
+vector representations.
+
+Example
+
+Sentence: 
+The cat is sitting on the mat.
+The dog is eating meat.
+
+Example Word Vectors
+
+Word Vector (Example)
+
+cat [0.21, -0.45, 0.78] 
+dog [0.24, -0.41, 0.75] 
+mat [0.81, 0.12, -0.33]
+sitting [0.55, 0.63, 0.18]
+
+Observation
+
+-   “cat” and “dog” have similar vector values because both are animals.
+-   “cat” and “mat” have different vectors because their meanings are
+    different.
+
+Key Points
+
+1.  Converts words into dense numerical vectors.
+2.  Captures the semantic meaning of words.
+3.  Similar words have similar vector representations.
+4.  Used in modern NLP models such as Word2Vec, GloVe, FastText, and BERT.
+
+
+Word Embeddings are divided into two main approaches:
+
+1. Count / Frequency Based Methods
+
+These methods represent words based on how frequently they occur in a
+document.
+
+Methods: 
+1. One Hot Encoding (OHE) 
+2. Bag of Words (BoW) 
+3. TF-IDF (TermFrequency – Inverse Document Frequency)
+
+2. Prediction / Deep Learning Based Methods
+
+These methods use Artificial Neural Networks (ANN) to learn the meaning
+of words.
+
+Deep Learning Model: Word2Vec
+
+Word2Vec has two architectures: 
+1. CBOW (Continuous Bag of Words) 
+2. Skip-Gram
+

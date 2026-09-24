@@ -1,0 +1,286 @@
+Text Preprocessing is the first and one of the most important steps in Natural Language Processing (NLP). 
+It is the process of cleaning, transforming, and organizing raw text into a structured format so that machines 
+can understand and analyze it effectively. 
+Since real-world text often contains punctuation, mixed letter cases, numbers, special symbols, and unnecessary words, preprocessing improves the quality of the data and enhances the performance of NLP models.
+
+----------------------------------------------------------------------------------------
+
+Some of the fundamental text preprocessing techniques are:
+
+1. Tokenization
+
+Definition:
+Tokenization is the process of breaking a large piece of text into smaller units called tokens. 
+These tokens can be words, sentences, or even characters, depending on the application.
+
+It is usually the first step in text preprocessing because most NLP algorithms work on individual tokens rather 
+than complete paragraphs.
+
+Types of Tokenization
+Type 1. Sentence Tokenization
+
+Splits a paragraph into individual sentences.
+
+Example:
+
+Input: Rahul is studying NLP. He loves Python.
+
+Output:
+
+1. Rahul is studying NLP.
+2. He loves Python.
+
+Type 2. Word Tokenization
+Splits a sentence into individual words.
+
+Example:
+
+Input: Rahul is studying NLP.
+
+Output:
+
+['Rahul', 'is', 'studying', 'NLP', '.']
+
+Why Tokenization is Important
+- Breaks text into manageable pieces.
+- Makes further processing easier.
+- Required for POS Tagging, Named Entity Recognition (NER), Parsing, Sentiment Analysis, and Text Classification.
+- Helps count word frequency.
+
+----------------------------------------------------------------------------------------
+
+2. Lowercasing (Convert Text to Lowercase)
+
+Definition:
+Lowercasing is the process of converting all uppercase letters into lowercase letters. 
+This ensures that words with different capitalizations are treated as the same word.
+
+For example, "Python", "PYTHON", and "python" should all be recognized as the same word.
+
+Example
+
+Input
+
+Python is Amazing.
+I LOVE NLP.
+
+Output
+
+python is amazing.
+i love nlp.
+
+Why Lowercasing is Important
+
+- Without lowercasing:
+
+Python
+python
+PYTHON
+
+The computer treats these as three different words.
+
+- After lowercasing:
+
+python
+python
+python
+
+Now they are treated as one unique word, reducing unnecessary duplication.
+
+Advantages
+- Reduces vocabulary size.
+- Improves text consistency.
+- Makes searching and matching words easier.
+- Increases model accuracy by treating identical words equally.
+
+----------------------------------------------------------------------------------------
+
+3. Regular Expressions (Regex)
+
+Definition:
+A Regular Expression (Regex) is a sequence of characters used to search, match, extract, or replace specific 
+patterns in text.
+
+Regex is widely used during text preprocessing to clean unwanted characters from text before applying NLP algorithms.
+
+Common Uses of Regex in NLP
+- Remove punctuation
+- Remove numbers
+- Remove special characters
+- Remove extra spaces
+- Extract email addresses
+- Extract phone numbers
+- Validate patterns
+- Clean noisy text
+
+Example 1: Remove Special Characters
+
+Input: Hello!!! Welcome @ NLP #2026.
+
+Output
+Hello Welcome NLP
+
+Example 2: Remove Numbers
+
+Input: Python 3.12 was released in 2026.
+
+Output
+Python was released in
+
+Example 3: Remove Extra Spaces
+
+Input: I     love      NLP
+
+Output
+I love NLP
+
+COMMON REGULAR EXPRESSION (REGEX) PATTERNS
+
+1. \d – Any Digit
+Definition:
+The \d pattern matches any single numeric digit from 0 to 9.
+
+Examples:
+5
+8
+0
+
+Example:
+Input : "Python 3.12"
+Regex : \d
+Matches : 3, 1, 2
+
+
+2. \D – Non-Digit
+Definition:
+The \D pattern matches any character that is NOT a digit. It includes letters, spaces, punctuation marks, and special symbols.
+
+Examples:
+A
+b
+@
+
+Example:
+Input : "Python123"
+Regex : \D
+Matches : P, y, t, h, o, n
+
+
+3. \w – Word Character
+Definition:
+The \w pattern matches any letter (A-Z, a-z), digit (0-9), or underscore (_).
+
+Examples:
+Python
+123
+_
+Python_123
+
+Example:
+Input : "Python_123!"
+Regex : \w
+Matches : P, y, t, h, o, n, _, 1, 2, 3
+
+
+4. \W – Non-Word Character
+Definition:
+The \W pattern matches any character that is NOT a letter, digit, or underscore. It mainly matches special characters and spaces.
+
+Examples:
+@
+#
+!
+%
+
+Example:
+Input : "Python@123!"
+Regex : \W
+Matches : @, !
+
+
+5. \s – Whitespace Character
+Definition:
+The \s pattern matches any whitespace character, including spaces, tabs, and newline characters.
+
+Examples:
+Space
+Tab
+Newline
+
+Example:
+Input : "Hello   World"
+Regex : \s
+Matches : All spaces between "Hello" and "World"
+
+
+6. \S – Non-Whitespace Character
+Definition:
+The \S pattern matches any character that is NOT a whitespace character.
+
+Examples:
+P
+y
+t
+h
+o
+n
+
+Example:
+Input : "Hello World"
+Regex : \S
+Matches : H, e, l, l, o, W, o, r, l, d
+
+
+7. ^ – Start of String
+Definition:
+The ^ symbol matches the beginning (start) of a string.
+
+Example:
+Input : "Python is easy"
+Regex : ^Python
+Match : Python
+
+Here, "Python" is matched because it appears at the beginning of the string.
+
+
+8. $ – End of String
+Definition:
+The $ symbol matches the end of a string.
+
+Example:
+Input : "I love Python"
+Regex : Python$
+Match : Python
+
+Here, "Python" is matched because it appears at the end of the string.
+
+
+9. . (Dot) – Any Character
+Definition:
+The dot (.) pattern matches any single character except a newline (\n).
+
+Examples:
+a
+b
+1
+@
+
+Example:
+Input : "cat"
+Regex : c.t
+Match : cat
+
+Here, the dot (.) matches the letter "a", so the entire word "cat" is matched.
+
+
+SUMMARY
+
+\d  → Matches any digit (0–9).
+\D  → Matches any non-digit character.
+\w  → Matches any letter, digit, or underscore.
+\W  → Matches any character except letters, digits, and underscores.
+\s  → Matches any whitespace character (space, tab, newline).
+\S  → Matches any non-whitespace character.
+^   → Matches the beginning of a string.
+$   → Matches the end of a string.
+.   → Matches any single character except a newline.

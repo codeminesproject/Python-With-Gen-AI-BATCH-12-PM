@@ -1,0 +1,251 @@
+Word2Vec Notes (Detailed)
+
+1. What is Word2Vec?
+
+Word2Vec is a Natural Language Processing (NLP) technique developed by
+Google in 2013 by Tomas Mikolov and his team. It converts words into
+dense numerical vectors (embeddings) so that words having similar
+meanings are located close to each other in vector space.
+
+Examples: - King ≈ Queen - Car ≈ Vehicle - Teacher ≈ Professor
+
+Unlike One-Hot Encoding, Word2Vec captures semantic meaning.
+
+------------------------------------------------------------------------
+
+2. Why Do We Need Word2Vec?
+
+Problem with One-Hot Encoding
+
+Sentence: CodeMines is a computer training institute
+
+Vocabulary: 1. CodeMines 2. is 3. a 4. computer 5. training 6. institute
+
+One-Hot Encoding:
+
+CodeMines = [1,0,0,0,0,0] is = [0,1,0,0,0,0] a = [0,0,1,0,0,0] computer
+= [0,0,0,1,0,0] training = [0,0,0,0,1,0] institute = [0,0,0,0,0,1]
+
+Disadvantages: - Very sparse vectors - High memory usage - Does not
+represent similarity between words
+
+------------------------------------------------------------------------
+
+3. What is Word Embedding?
+
+Word embedding converts every word into a dense vector of real numbers.
+
+Example (2D representation only):
+
+King = [0.95, 0.96] Queen = [0.94, 0.95] Man = [0.80, 0.78] Woman =
+[0.79, 0.77]
+
+In reality vectors usually have 100, 200 or 300 dimensions.
+
+------------------------------------------------------------------------
+
+4. Word2Vec Architectures
+
+There are two training methods:
+
+1.  CBOW (Continuous Bag of Words)
+2.  Skip-Gram
+
+================================================== 
+CBOW (Continuous Bagof Words) 
+==================================================
+
+Idea: Predict the CENTER word using surrounding (context) words.
+
+Sentence:
+
+CodeMines computer is a training institute
+
+Window Size = 5
+
+Context Words: CodeMines, computer, a, training
+
+Target Word: is
+
+Input: CodeMines computer a training
+
+Output: is
+
+Training Example:
+
+Input ——————> Output
+
+CodeMines computer a training ————-> is
+
+Next Window
+
+Sentence: CodeMines computer is a training institute
+
+Context: computer is training institute
+
+Target: a
+
+Input: computer is training institute
+
+Output: a
+
+Advantages - Faster than Skip-Gram - Good for large datasets - Works
+well for frequent words
+
+Disadvantages - Poor performance for rare words
+
+================================================== 
+Skip-Gram
+==================================================
+
+Idea: Predict surrounding words using the CENTER word.
+
+Sentence:
+
+CodeMines computer is a training institute
+
+Center Word: is
+
+Input: is
+
+Outputs: CodeMines computer a training
+
+Training Examples
+
+Input -> Output
+
+is -> CodeMines is -> computer is -> a is -> training
+
+Advantages - Better for small datasets - Learns rare words effectively
+
+Disadvantages - Slower than CBOW
+
+------------------------------------------------------------------------
+
+5. Neural Network Used
+
+Word2Vec uses a simple Feed Forward Fully Connected Neural Network.
+
+Input Layer ↓
+
+Hidden Layer (Embedding Layer)
+
+↓
+
+Output Layer
+
+Training updates the weights. The hidden layer weights become the word
+embeddings.
+
+------------------------------------------------------------------------
+
+6. Cosine Similarity
+
+Cosine Similarity measures similarity between two vectors.
+
+Formula
+
+Cosine Similarity = (A · B) / (||A|| ||B||)
+
+Range
+
++1 = Exactly similar 0 = Unrelated (90°) -1 = Opposite direction
+
+Cosine Distance
+
+Distance = 1 − Cosine Similarity
+
+Examples
+
+Case 1
+
+Angle = 0°
+
+Cosine Similarity = 1
+
+Distance = 0
+
+Means both words are almost identical.
+
+Case 2
+
+Angle = 45°
+
+Cosine Similarity = 0.707
+
+Distance = 1 − 0.707
+
+= 0.293
+
+Case 3
+
+Angle = 90°
+
+Cosine Similarity = 0
+
+Distance = 1
+
+Words are unrelated.
+
+------------------------------------------------------------------------
+
+7. Semantic Relationships
+
+Word2Vec captures relationships.
+
+King − Man + Woman ≈ Queen
+
+Paris − France + Italy ≈ Rome
+
+Doctor ≈ Physician
+
+Big ≈ Large
+
+Happy ≈ Joyful
+
+------------------------------------------------------------------------
+
+8. Real-Life Applications
+
+1.  Search Engines
+2.  Chatbots
+3.  Machine Translation
+4.  Sentiment Analysis
+5.  Text Classification
+6.  Recommendation Systems
+7.  Document Clustering
+8.  Question Answering
+
+------------------------------------------------------------------------
+
+9. CBOW vs Skip-Gram
+
+Feature CBOW Skip-Gram
+
+Prediction Center Word Context Words Speed Fast Slow Rare Words Poor
+Excellent Large Dataset Excellent Good Small Dataset Good Excellent
+
+------------------------------------------------------------------------
+
+10. Interview Questions
+
+1.  What is Word2Vec?
+2.  Why is One-Hot Encoding not sufficient?
+3.  Difference between CBOW and Skip-Gram?
+4.  What is Word Embedding?
+5.  What is Cosine Similarity?
+6.  What is Cosine Distance?
+7.  Which algorithm is faster?
+8.  Which algorithm handles rare words better?
+9.  What is the purpose of the hidden layer?
+10. Give one real-world application of Word2Vec.
+
+------------------------------------------------------------------------
+
+11. Summary
+
+• Word2Vec converts words into dense vectors. • Similar words have
+similar vectors. • Two algorithms: - CBOW - Skip-Gram • Uses a Fully
+Connected Neural Network. • Similarity is measured using Cosine
+Similarity. • Distance = 1 − Cosine Similarity. • Used in almost every
+modern NLP application.

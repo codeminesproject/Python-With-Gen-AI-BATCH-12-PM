@@ -1,0 +1,270 @@
+Bag of Words (BoW)
+
+Definition
+
+Bag of Words (BoW) is one of the simplest and most widely used Natural Language Processing (NLP) techniques for converting text into numerical data. 
+Since machine learning algorithms cannot process text directly, Bag of Words transforms text into a matrix of numbers based on the frequency of words.
+The Bag of Words model counts how many times each word appears in a document without considering the grammar, sentence structure, or the order of words.
+
+In simple words:
+Bag of Words represents a document by counting the occurrence (frequency) of each word in the document.
+
+Why is it called "Bag of Words"?
+
+Imagine putting all the words from a sentence into a bag.
+
+Sentence:
+
+He is a good boy
+
+The bag contains:
+
+He
+is
+a
+good
+boy
+
+If we rearrange the sentence:
+
+Good boy is he
+
+or
+
+Boy is good he
+
+Bag of Words treats all of them as the same because it only looks at the words present, not their order.
+
+Example Dataset
+
+Consider the following dataset:
+
+Text                          Output
+He is a good boy              1
+She is a good girl            1
+Boy and girl are good         1
+
+The output column represents the target class. In this example, all sentences belong to the same class (1).
+
+Step 1: Convert Text into Lowercase
+Before processing, convert all sentences into lowercase.
+
+Original Sentence
+He is a good boy
+
+Lowercase
+he is a good boy
+
+Similarly,
+She is a good girl
+
+becomes
+she is a good girl
+
+and
+Boy and girl are good
+
+becomes
+boy and girl are good
+
+Lowercasing ensures that words like Boy and boy are treated as the same word.
+
+Step 2: Tokenization
+Tokenization means splitting a sentence into individual words.
+
+Sentence 1
+
+he
+is
+a
+good
+boy
+
+Sentence 2
+
+she
+is
+a
+good
+girl
+
+Sentence 3
+
+boy
+and
+girl
+are
+good
+
+Each word is called a token.
+
+Step 3: Create Vocabulary
+
+A vocabulary is the list of all unique words that appear in the dataset.
+From the three sentences, the unique words are:
+
+a
+and
+are
+boy
+girl
+good
+he
+is
+she
+
+Vocabulary Table
+
+Index   Word
+-----   ----
+1       a
+2       and
+3       are
+4       boy
+5       girl
+6       good
+7       he
+8       is
+9       she
+
+Vocabulary Size = 9
+
+Step 4: Count Word Frequency
+Now count how many times every vocabulary word appears in each sentence.
+
+==========================
+Sentence 1
+==========================
+
+Sentence:
+He is a good boy
+
+Word    Count
+----------------
+a       1
+and     0
+are     0
+boy     1
+girl    0
+good    1
+he      1
+is      1
+she     0
+
+Vector Representation:
+[1,0,0,1,0,1,1,1,0]
+
+
+==========================
+Sentence 2
+==========================
+
+Sentence:
+She is a good girl
+
+Word    Count
+----------------
+a       1
+and     0
+are     0
+boy     0
+girl    1
+good    1
+he      0
+is      1
+she     1
+
+Vector Representation:
+[1,0,0,0,1,1,0,1,1]
+
+
+==========================
+Sentence 3
+==========================
+
+Sentence:
+Boy and girl are good
+
+Word    Count
+----------------
+a       0
+and     1
+are     1
+boy     1
+girl    1
+good    1
+he      0
+is      0
+she     0
+
+Vector Representation:
+[0,1,1,1,1,1,0,0,0]
+
+==========================================
+Advantages of Bag of Words (BoW)
+==========================================
+
+1. Simple and Intuitive
+   - Bag of Words is easy to understand and implement.
+   - It converts text into numerical vectors using word frequency.
+
+2. Fixed Size Input
+   - Every document is converted into a fixed-length feature vector.
+   - These vectors can be directly used by Machine Learning algorithms such as
+     Logistic Regression, Naïve Bayes, Decision Trees, and SVM.
+
+3. Easy to Implement
+   - Available in Scikit-learn using CountVectorizer.
+   - Requires very little preprocessing.
+
+4. Fast Processing
+   - Suitable for small and medium-sized datasets.
+   - Computationally efficient compared to advanced embedding techniques.
+
+5. Useful for Text Classification
+   - Works well for tasks like Spam Detection, Sentiment Analysis,
+     Document Classification, and News Classification.
+
+
+==========================================
+Disadvantages of Bag of Words (BoW)
+==========================================
+
+1. Sparse Matrix (High-Dimensional Data)
+   - Large vocabularies create many columns.
+   - Most values are 0, resulting in a sparse matrix.
+   - Sparse matrices increase memory usage and may lead to overfitting.
+
+2. Ignores Word Order
+   - The sequence of words is not considered.
+   - Example:
+       "Dog bites man"
+       "Man bites dog"
+     Both sentences have the same Bag of Words representation,
+     even though their meanings are different.
+
+3. Out of Vocabulary (OOV)
+   - Words that were not present during training cannot be represented.
+   - Unknown words are simply ignored by the model.
+
+4. Cannot Capture Semantic Meaning
+   - Bag of Words only counts word frequency.
+   - It does not understand the meaning or context of words.
+   - Example:
+       "The food is good"
+       "The food is not good"
+     Both sentences appear very similar because BoW does not understand
+     that the word "not" changes the sentiment.
+
+5. No Context Awareness
+   - Words with multiple meanings are treated the same.
+   - Example:
+       "Bank" (river bank)
+       "Bank" (financial institution)
+     BoW cannot distinguish between these meanings.
+
+6. Treats Similar Words as Different
+   - Synonyms are considered different words.
+   - Example:
+       Car, Automobile, Vehicle
+     These are treated as separate features even though they have similar meanings.

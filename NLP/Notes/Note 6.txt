@@ -1,0 +1,177 @@
+N-grams
+
+N-grams are contiguous (consecutive) sequences of N words or tokens extracted 
+from a sentence or text. 
+They are used in Natural Language Processing (NLP) to capture the relationship 
+and context between neighboring words.
+
+Where:
+
+N = 1 → Unigram (single word)
+N = 2 → Bigram (two consecutive words)
+N = 3 → Trigram (three consecutive words)
+N = 4 → Four-gram (four consecutive words)
+
+Example:
+
+Sentence:
+The food is not good
+
+Unigram (N = 1)
+----------------
+The
+food
+is
+not
+good
+
+Bigram (N = 2)
+--------------
+The food
+food is
+is not
+not good
+
+Trigram (N = 3)
+---------------
+The food is
+food is not
+is not good
+
+4-gram (N = 4)
+--------------
+The food is not
+food is not good
+
+N-GRAMS EXAMPLE
+
+Example
+
+Sentence 1 (S1):
+The food is good
+
+Sentence 2 (S2):
+The food is not good
+
+Notice:
+Both sentences contain the word "good", but their meanings are different because of the word "not".
+
+------------------------------------------------------------
+Step 1: Remove Stop Words
+------------------------------------------------------------
+
+Assume "The" and "is" are removed.
+
+S1:
+food good
+
+S2:
+food not good
+
+------------------------------------------------------------
+Unigram (N = 1)
+------------------------------------------------------------
+
+Each individual word becomes a feature.
+
+Vocabulary:
+[food, not, good]
+
++----------+------+-----+------+
+| Sentence | food | not | good |
++----------+------+-----+------+
+| S1       |  1   |  0  |  1   |
+| S2       |  1   |  1  |  1   |
++----------+------+-----+------+
+
+Problem:
+Both sentences contain the word "good", so the model cannot easily understand that
+"not good" has a negative meaning.
+
+------------------------------------------------------------
+Bigram (N = 2)
+------------------------------------------------------------
+
+Now we consider two consecutive words.
+
+S1 Bigrams:
+food good
+
+S2 Bigrams:
+food not
+not good
+
+Vocabulary:
+[food, not, good, food good, food not, not good]
+
++----------+------+-----+------+-----------+----------+----------+
+| Sentence | food | not | good | food good | food not | not good |
++----------+------+-----+------+-----------+----------+----------+
+| S1       |  1   |  0  |  1   |     1     |     0    |     0    |
+| S2       |  1   |  1  |  1   |     0     |     1    |     1    |
++----------+------+-----+------+-----------+----------+----------+
+
+Why is this better?
+
+The feature "not good" clearly tells the model that the sentence has a negative meaning.
+
+Even though both sentences contain the word "good", the bigram "not good"
+preserves the context.
+
+------------------------------------------------------------
+Trigram (N = 3)
+------------------------------------------------------------
+
+Three consecutive words are considered.
+
+S1:
+food good
+
+(No trigram because only two words remain after removing stop words.)
+
+S2:
+food not good
+
+Vocabulary:
+[food not good]
+
++----------+---------------+
+| Sentence | food not good |
++----------+---------------+
+| S1       |       0       |
+| S2       |       1       |
++----------+---------------+
+
+The trigram captures the complete phrase, making the meaning even clearer.
+
+------------------------------------------------------------
+Comparison
+------------------------------------------------------------
+
++-----------+-------------------------------+-------------------+
+| N-gram    | Example                       | Context Preserved |
++-----------+-------------------------------+-------------------+
+| Unigram   | food, not, good              | Very little       |
+| Bigram    | food good, food not, not good| Better            |
+| Trigram   | food not good                | Even better       |
++-----------+-------------------------------+-------------------+
+
+------------------------------------------------------------
+Advantages of N-grams
+------------------------------------------------------------
+
+1. Preserves the order of words.
+2. Captures the context of nearby words.
+3. Improves sentiment analysis (e.g., "not good", "very happy").
+4. Simple to implement.
+5. Often performs better than Bag of Words for text classification.
+
+------------------------------------------------------------
+Disadvantages of N-grams
+------------------------------------------------------------
+
+1. Vocabulary size grows rapidly as N increases.
+2. Produces many sparse (mostly zero) features.
+3. Requires more memory and computation.
+4. Rare phrases may appear only once, making learning difficult.
+5. Large values of N require much more training data.

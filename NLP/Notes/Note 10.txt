@@ -1,0 +1,203 @@
+Word2Vec (CBOW)
+
+CBOW (Continuous Bag of Words) is one of the two architectures of Word2Vec.
+
+Its objective is:
+
+Predict the center (target) word using the surrounding (context) words.
+
+Unlike Skip-Gram, where the target word predicts the context words, CBOW uses the surrounding context words to predict the target word.
+
+------------------------------------------------------------------------
+
+Example Sentence
+
+The king is a strong man.
+
+Vocabulary
+
+    Index Word
+  ------- --------
+        1 the
+        2 king
+        3 is
+        4 a
+        5 strong
+        6 man
+
+Vocabulary Size = 6
+
+------------------------------------------------------------------------
+
+Step 1: One-Hot Encoding
+
+  Word     One-Hot Vector
+  -------- --------------------
+  the      [1, 0, 0, 0, 0, 0]
+  king     [0, 1, 0, 0, 0, 0]
+  is       [0, 0, 1, 0, 0, 0]
+  a        [0, 0, 0, 1, 0, 0]
+  strong   [0, 0, 0, 0, 1, 0]
+  man      [0, 0, 0, 0, 0, 1]
+
+Every vector has length 6 because there are 6 unique words.
+
+------------------------------------------------------------------------
+
+Step 2: CBOW Training
+
+Sentence:
+
+The king is a strong man
+
+Window Size = 5
+
+  Context Words (Input)   Target Word (Output)
+  ----------------------- ----------------------
+  the                     
+  king                    
+  a                       is
+  strong                  
+
+Input Vectors
+
+  Word     One-Hot Vector
+  -------- ----------------
+  the      [1,0,0,0,0,0]
+  king     [0,1,0,0,0,0]
+  a        [0,0,0,1,0,0]
+  strong   [0,0,0,0,1,0]
+
+------------------------------------------------------------------------
+
+Step 3: Input Layer
+
+Each neuron represents one word in the vocabulary.
+
+the
+
+king
+
+is
+
+a
+
+strong
+
+man
+
+------------------------------------------------------------------------
+
+Step 4: Hidden Layer (Embedding Layer)
+
+Assume:
+
+-   Vocabulary Size = 6
+-   Embedding Size = 4
+
+The hidden layer stores a 6 × 4 embedding matrix.
+
+  Word         D1      D2     D3     D4
+  -------- ------ ------- ------ ------
+  the        0.15   -0.22   0.61   0.40
+  king       0.92    0.81   0.74   0.66
+  is         0.10    0.05   0.18   0.12
+  a          0.12    0.14   0.09   0.03
+  strong     0.75    0.88   0.60   0.52
+  man        0.90    0.79   0.71   0.64
+
+This complete table is called the Embedding Matrix (Hidden Layer).
+
+Example 1
+
+Input:
+
+King → [0,1,0,0,0,0]
+
+Output from Hidden Layer:
+
+  Word   Embedding
+  ------ --------------------------
+  king   [0.92, 0.81, 0.74, 0.66]
+
+Example 2
+
+Input:
+
+Strong → [0,0,0,0,1,0]
+
+  Word     Embedding
+  -------- --------------------------
+  strong   [0.75, 0.88, 0.60, 0.52]
+
+Example 3
+
+Input:
+
+Man → [0,0,0,0,0,1]
+
+  Word   Embedding
+  ------ --------------------------
+  man    [0.90, 0.79, 0.71, 0.64]
+
+------------------------------------------------------------------------
+
+Before Training (Random Weights)
+
+  Word        D1     D2     D3     D4
+  ------- ------ ------ ------ ------
+  king      0.18   0.44   0.27   0.31
+  queen     0.61   0.15   0.83   0.11
+  man       0.72   0.28   0.19   0.42
+
+After Training (Learned Embeddings)
+
+  Word        D1     D2     D3     D4
+  ------- ------ ------ ------ ------
+  king      0.92   0.81   0.74   0.66
+  queen     0.91   0.80   0.75   0.65
+  man       0.90   0.79   0.71   0.64
+  woman     0.89   0.78   0.72   0.63
+
+------------------------------------------------------------------------
+
+Step 5: Output Layer
+
+  Word       Probability
+  -------- -------------
+  the               0.02
+  king              0.04
+  is                0.93
+  a                 0.01
+  strong            0.00
+  man               0.00
+
+Predicted Word = is
+
+------------------------------------------------------------------------
+
+Note
+
+The vectors shown above are illustrative examples for learning purposes.
+Real pre-trained Word2Vec models usually use 100–300 dimensions and
+learn the values automatically during training.
+
+------------------------------------------------------------------------
+
+Advantages of CBOW
+
+Faster to train than Skip-Gram.
+Computationally efficient.
+Works well with large datasets.
+Performs well for frequent words.
+Requires less memory and training time.
+Produces good-quality word embeddings for common vocabulary.
+
+------------------------------------------------------------------------
+
+Disadvantages of CBOW
+
+Less effective for rare words.
+Ignores the order of context words (Bag of Words assumption).
+Averaging context embeddings may lose some contextual information.
+Cannot distinguish different meanings of the same word (polysemy).

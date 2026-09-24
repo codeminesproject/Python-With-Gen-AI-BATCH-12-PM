@@ -33,7 +33,7 @@ model = Word2Vec(
     window=5,            # Context window size
     min_count=1,         # Keep every word
     workers=4,           # Number of CPU cores
-    sg=0                 # 0 = CBOW, 1 = Skip-Gram
+    sg=1                 # 0 = CBOW, 1 = Skip-Gram
 )
 
 print("\nModel Training Completed Successfully.")
